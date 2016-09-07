@@ -41,14 +41,21 @@ function fsnUpdateButton(event) {
 
 //update Button layout
 function fsnUpdateButtonLayout() {
-	
+	var postID = jQuery('input#post_ID').val();
 	var buttonLayout = jQuery('[name="button_layout"]').val();
 	
 	var data = {
 		action: 'button_load_layout',
-		button_layout: buttonLayout
+		button_layout: buttonLayout,
+		post_id: postID,
+		security: fsnExtButtonJS.fsnEditButtonNonce
 	};
 	jQuery.post(ajaxurl, data, function(response) {
+		if (response == '-1') {
+			alert('Oops, something went wrong. Please reload the page and try again.');
+			return false;
+		}
+		
 		jQuery('#fsn_button_modal .tab-pane .form-group.button-layout').remove();
 		if (response !== null) {
 			jQuery('#fsn_button_modal .tab-pane').each(function() {

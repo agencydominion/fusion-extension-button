@@ -49,6 +49,10 @@ class FusionExtensionButton	{
 		// Editor scripts and styles
 		if ( ($hook_suffix == 'post.php' || $hook_suffix == 'post-new.php') && (!empty($fsn_post_types) && is_array($fsn_post_types) && in_array($post->post_type, $fsn_post_types)) ) {
 			wp_enqueue_script( 'fsn_button_admin', plugin_dir_url( __FILE__ ) . 'includes/js/fusion-extension-button-admin.js', array('jquery'), '1.0.0', true );
+			wp_localize_script( 'fsn_button_admin', 'fsnExtButtonJS', array(
+					'fsnEditButtonNonce' => wp_create_nonce('fsn-admin-edit-button')
+				)
+			);
 		}
 	}
 

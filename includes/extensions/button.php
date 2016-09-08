@@ -39,6 +39,13 @@ class FusionButton	{
 	 */
 	 
 	public function load_button_layout() {
+		//verify nonce
+		check_ajax_referer( 'fsn-admin-edit-button', 'security' );
+		
+		//verify capabilities
+		if ( !current_user_can( 'edit_post', $_POST['post_id'] ) )
+			die( '-1' );
+			
 		global $fsn_button_layouts;
 		$button_layout = $_POST['button_layout'];
 		

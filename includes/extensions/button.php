@@ -198,7 +198,7 @@ class FusionButton	{
 		$output = '';
 		
 		if (!empty($button_layout)) {
-			$callback_function = 'fsn_get_'. $button_layout .'_button';
+			$callback_function = 'fsn_get_'. sanitize_text_field($button_layout) .'_button';
 			$output .= '<div class="fsn-button '. esc_attr($button_layout) .' '. fsn_style_params_class($atts) .'">';
 				$output .= call_user_func($callback_function, $atts, $content);
 			$output .= '</div>';

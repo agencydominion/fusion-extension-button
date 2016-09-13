@@ -43,11 +43,11 @@ class FusionButton	{
 		check_ajax_referer( 'fsn-admin-edit-button', 'security' );
 		
 		//verify capabilities
-		if ( !current_user_can( 'edit_post', $_POST['post_id'] ) )
+		if ( !current_user_can( 'edit_post', intval($_POST['post_id']) ) )
 			die( '-1' );
 			
 		global $fsn_button_layouts;
-		$button_layout = $_POST['button_layout'];
+		$button_layout = sanitize_text_field($_POST['button_layout']);
 		
 		if (!empty($fsn_button_layouts) && !empty($button_layout)) {
 			$response_array = array();
@@ -60,17 +60,16 @@ class FusionButton	{
 					$depends_on_field = $param['dependency']['param_name'];
 					$depends_on_not_empty = !empty($param['dependency']['not_empty']) ? $param['dependency']['not_empty'] : false;
 					if (!empty($param['dependency']['value']) && is_array($param['dependency']['value'])) {
-						$depends_on_value = esc_attr(json_encode($param['dependency']['value']));
+						$depends_on_value = json_encode($param['dependency']['value']);
 					} else if (!empty($param['dependency']['value'])) {
 						$depends_on_value = $param['dependency']['value'];
 					} else {
 						$depends_on_value = '';
 					}
-					
 					$dependency_callback = !empty($param['dependency']['callback']) ? $param['dependency']['callback'] : '';
-					$dependency_string = ' data-dependency-param="'. $depends_on_field .'"'. ($depends_on_not_empty === true ? ' data-dependency-not-empty="true"' : '') . (!empty($depends_on_value) ? ' data-dependency-value="'. $depends_on_value .'"' : '') . (!empty($dependency_callback) ? ' data-dependency-callback="'. $dependency_callback .'"' : '');
+					$dependency_string = ' data-dependency-param="'. esc_attr($depends_on_field) .'"'. ($depends_on_not_empty === true ? ' data-dependency-not-empty="true"' : '') . (!empty($depends_on_value) ? ' data-dependency-value="'. esc_attr($depends_on_value) .'"' : '') . (!empty($dependency_callback) ? ' data-dependency-callback="'. esc_attr($dependency_callback) .'"' : '');
 				}
-				$param_output = '<div class="form-group button-layout'. ( !empty($param['class']) ? ' '. $param['class'] : '' ) .'"'. ( $dependency === true ? $dependency_string : '' ) .'>';
+				$param_output = '<div class="form-group button-layout'. ( !empty($param['class']) ? ' '. esc_attr($param['class']) : '' ) .'"'. ( $dependency === true ? $dependency_string : '' ) .'>';
 					$param_output .= FusionCore::get_input_field($param, $param_value);
 				$param_output .= '</div>';
 				$response_array[] = array(
@@ -199,8 +198,8 @@ class FusionButton	{
 		$output = '';
 		
 		if (!empty($button_layout)) {
-			$callback_function = 'fsn_get_'. $button_layout .'_button';
-			$output .= '<div class="fsn-button '. $button_layout .' '. fsn_style_params_class($atts) .'">';
+			$callback_function = 'fsn_get_'. sanitize_text_field($button_layout) .'_button';
+			$output .= '<div class="fsn-button '. esc_attr($button_layout) .' '. fsn_style_params_class($atts) .'">';
 				$output .= call_user_func($callback_function, $atts, $content);
 			$output .= '</div>';
 		}
@@ -282,7 +281,7 @@ function fsn_get_standard_button($atts = false, $content = false) {
 			$button_classes .= !empty($button_btn_block) ? ' btn-block' : '';
 		}
 		
-		$output .= apply_filters('fsn_standard_button_output', '<a'. fsn_get_button_anchor_attributes($button_object, $button_classes) .'>'. $button_object['button_label'] .'</a>', $atts);
+		$output .= apply_filters('fsn_standard_button_output', '<a'. fsn_get_button_anchor_attributes($button_object, $button_classes) .'>'. esc_html($button_object['button_label']) .'</a>', $atts);
 	}
 	
 	return $output;

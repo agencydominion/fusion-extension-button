@@ -120,13 +120,9 @@ function fsnUpdateButtonLayout() {
 	});	
 }
 
-//For chosen fields inside button items
+//For select2 fields inside button items
 jQuery(document).ready(function() {	
 	jQuery('body').on('fsnButtonUpdated', function(e) {
-		jQuery('.chosen select').chosen({
-			allow_single_deselect: true,
-			width: '100%',
-			placeholder_text_single : 'Choose an option.'
-		});
+		initSelect2Fields();
 	});
 });

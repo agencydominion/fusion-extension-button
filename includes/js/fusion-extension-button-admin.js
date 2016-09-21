@@ -123,6 +123,6 @@ function fsnUpdateButtonLayout() {
 //For select2 fields inside button items
 jQuery(document).ready(function() {	
 	jQuery('body').on('fsnButtonUpdated', function(e) {
-		initSelect2Fields();
+		fsnInitPostSelect();
 	});
 });

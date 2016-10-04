@@ -48,6 +48,7 @@ class FusionButton	{
 			
 		global $fsn_button_layouts;
 		$button_layout = sanitize_text_field($_POST['button_layout']);
+		$response_array = array();
 		
 		if (!empty($fsn_button_layouts) && !empty($button_layout)) {
 			$response_array = array();

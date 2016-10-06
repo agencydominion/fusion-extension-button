@@ -228,6 +228,14 @@ class FusionButton	{
 		);
 		$button_style_options = apply_filters('fsn_button_style_options', $button_style_options);
 		
+		$button_size_options = array(
+			'' => __('Default', 'fusion-extension-button'),
+			'btn-lg' => __('Large', 'fusion-extension-button'),
+			'btn-sm' => __('Small', 'fusion-extension-button'),
+			'btn-xs' => __('Extra Small', 'fusion-extension-button'),	
+		);
+		$button_size_options = apply_filters('fsn_button_size_options', $button_size_options);
+		
 		//standard button layout
 		$standard_layout = array(
 			'name' => __('Standard', 'fusion-extension-button'),
@@ -243,6 +251,16 @@ class FusionButton	{
 					'options' => $button_style_options,
 					'param_name' => 'button_style',
 					'label' => __('Style', 'fusion-extension-button')
+				),
+				array(
+					'type' => 'select',
+					'options' => $button_size_options,
+					'param_name' => 'button_size',
+					'label' => __('Size', 'fusion-extension-button'),
+					'dependency' => array(
+						'param_name' => 'button_style',
+						'value' => array('btn btn-default', 'btn btn-primary', 'btn btn-success', 'btn btn-info', 'btn btn-warning', 'btn btn-danger', 'btn btn-link')
+					)
 				),
 				array(
 					'type' => 'checkbox',
@@ -272,6 +290,7 @@ function fsn_get_standard_button($atts = false, $content = false) {
 	extract( shortcode_atts( array(
 		'button' => '',
 		'button_style' => '',
+		'button_size' => '',
 		'button_btn_block' => ''
 	), $atts ) );
 	
@@ -281,6 +300,7 @@ function fsn_get_standard_button($atts = false, $content = false) {
 		$button_object = fsn_get_button_object($button);
 		$button_classes = !empty($button_style) ? $button_style : '';
 		if (!empty($button_classes)) {
+			$button_classes .= !empty($button_size) ? ' '. $button_size : '';
 			$button_classes .= !empty($button_btn_block) ? ' btn-block' : '';
 		}
 		

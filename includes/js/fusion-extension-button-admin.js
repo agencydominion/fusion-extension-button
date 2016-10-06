@@ -26,7 +26,7 @@ function fsnUpdateButton(event) {
 	var button = jQuery('#fsn_button_modal');
 	var currentLayout = button.attr('data-layout');
 	if (currentLayout != '' && currentLayout != selectedLayout) {
-		var r = confirm('Changing the Button Layout will erase the current Button. Continue?');
+		var r = confirm(fsnExtButtonL10n.layout_change);
 		if (r == true) {			
 			button.attr('data-layout', selectedLayout);
 			fsnUpdateButtonLayout();
@@ -52,7 +52,7 @@ function fsnUpdateButtonLayout() {
 	};
 	jQuery.post(ajaxurl, data, function(response) {
 		if (response == '-1') {
-			alert('Oops, something went wrong. Please reload the page and try again.');
+			alert(fsnExtButtonL10n.error);
 			return false;
 		}
 		
@@ -112,7 +112,7 @@ function fsnUpdateButtonLayout() {
 			});
 		}
 		//initialize color pickers
-		jQuery('.ad-color-picker').wpColorPicker();
+		jQuery('.fsn-color-picker').wpColorPicker();
 		//set dependencies
 		setDependencies(modalSelector);
 		//trigger item added event

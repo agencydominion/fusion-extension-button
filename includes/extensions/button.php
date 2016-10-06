@@ -102,16 +102,18 @@ class FusionButton	{
 		
 		if ($shortcode == 'fsn_button' && !empty($saved_values['button-layout']) && array_key_exists($saved_values['button-layout'], $fsn_button_layouts)) {
 			$saved_layout = $saved_values['button-layout'];
-			$params_to_add = $fsn_button_layouts[$saved_layout]['params'];
-			for ($i=0; $i < count($params_to_add); $i++) {
-				if (empty($params_to_add[$i]['class'])) {
-					$params_to_add[$i]['class'] = 'button-layout';
-				} else {
-					$params_to_add[$i]['class'] .= ' button-layout';
+			$params_to_add = !empty($fsn_button_layouts[$saved_layout]['params']) ? $fsn_button_layouts[$saved_layout]['params'] : '';
+			if (!empty($params_to_add)) {
+				for ($i=0; $i < count($params_to_add); $i++) {
+					if (empty($params_to_add[$i]['class'])) {
+						$params_to_add[$i]['class'] = 'button-layout';
+					} else {
+						$params_to_add[$i]['class'] .= ' button-layout';
+					}
 				}
+				//add layout params to initial load
+				array_splice($params, 1, 0, $params_to_add);
 			}
-			//add layout params to initial load
-			array_splice($params, 1, 0, $params_to_add);
 		}
 		
 		return $params;

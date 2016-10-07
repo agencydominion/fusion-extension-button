@@ -299,7 +299,7 @@ function fsn_get_standard_button($atts = false, $content = false) {
 	if (!empty($button)) {
 		$button_object = fsn_get_button_object($button);
 		$button_classes = !empty($button_style) ? $button_style : '';
-		if (!empty($button_classes)) {
+		if (!empty($button_style)) {
 			$button_classes .= !empty($button_size) ? ' '. $button_size : '';
 			$button_classes .= !empty($button_btn_block) ? ' btn-block' : '';
 		}

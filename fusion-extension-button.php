@@ -7,7 +7,7 @@
  * Plugin Name: Fusion : Extension - Button
  * Plugin URI: http://www.agencydominion.com/fusion/
  * Description: Button Extension Package for Fusion.
- * Version: 1.1.2
+ * Version: 1.1.3
  * Author: Agency Dominion
  * Author URI: http://agencydominion.com
  * License: GPL2
@@ -53,6 +53,12 @@ class FusionExtensionButton	{
 					'fsnEditButtonNonce' => wp_create_nonce('fsn-admin-edit-button')
 				)
 			);
+			//add translation strings to script
+			$translation_array = array(
+				'error' => __('Oops, something went wrong. Please reload the page and try again.','fusion-extension-button'),
+				'layout_change' => __('Changing the Button Layout will erase the current Button. Continue?','fusion-extension-button')
+			);
+			wp_localize_script('fsn_button_admin', 'fsnExtButtonL10n', $translation_array);
 		}
 	}
 

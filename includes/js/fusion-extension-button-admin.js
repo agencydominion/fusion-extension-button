@@ -10,6 +10,7 @@ jQuery(document).ready(function() {
 		var selectedLayout = selectLayoutElement.val();
 		
 		button.attr('data-layout', selectedLayout);
+		console.log(jQuery(this).find('form').first().serialize());
 	});
 });
 

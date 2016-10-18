@@ -217,22 +217,22 @@ class FusionButton	{
 	public function standard_layout($button_layouts) {
 		
 		$button_style_options = array(
-			'' => __('Default', 'fusion-extension-button'),
-			'btn btn-default' => __('Button - Default', 'fusion-extension-button'),
-			'btn btn-primary' => __('Button - Primary', 'fusion-extension-button'),
-			'btn btn-success' => __('Button - Success', 'fusion-extension-button'),
-			'btn btn-info' => __('Button - Info', 'fusion-extension-button'),
-			'btn btn-warning' => __('Button - Warning', 'fusion-extension-button'),
-			'btn btn-danger' => __('Button - Danger', 'fusion-extension-button'),
-			'btn btn-link' => __('Button - Link', 'fusion-extension-button')	
+			'btn btn-default' => __('Default', 'fusion-extension-button'),
+			'btn btn-primary' => __('Primary', 'fusion-extension-button'),
+			'btn btn-success' => __('Success', 'fusion-extension-button'),
+			'btn btn-info' => __('Info', 'fusion-extension-button'),
+			'btn btn-warning' => __('Warning', 'fusion-extension-button'),
+			'btn btn-danger' => __('Danger', 'fusion-extension-button'),
+			'btn btn-link' => __('Link', 'fusion-extension-button'),
+			'none' => __('None', 'fusion-extension-button')
 		);
 		$button_style_options = apply_filters('fsn_button_style_options', $button_style_options);
 		
 		$button_size_options = array(
-			'' => __('Default', 'fusion-extension-button'),
+			'default' => __('Default', 'fusion-extension-button'),
 			'btn-lg' => __('Large', 'fusion-extension-button'),
 			'btn-sm' => __('Small', 'fusion-extension-button'),
-			'btn-xs' => __('Extra Small', 'fusion-extension-button'),	
+			'btn-xs' => __('Extra Small', 'fusion-extension-button')
 		);
 		$button_size_options = apply_filters('fsn_button_size_options', $button_size_options);
 		
@@ -298,10 +298,13 @@ function fsn_get_standard_button($atts = false, $content = false) {
 	
 	if (!empty($button)) {
 		$button_object = fsn_get_button_object($button);
-		$button_classes = !empty($button_style) ? $button_style : '';
-		if (!empty($button_style)) {
-			$button_classes .= !empty($button_size) ? ' '. $button_size : '';
+		
+		if (!empty($button_style) && $button_style != 'none') {
+			$button_classes = $button_style;
+			$button_classes .= !empty($button_size) && $button_size != 'default' ? ' '. $button_size : '';
 			$button_classes .= !empty($button_btn_block) ? ' btn-block' : '';
+		} else {
+			$button_classes = '';
 		}
 		
 		$output .= apply_filters('fsn_standard_button_output', '<a'. fsn_get_button_anchor_attributes($button_object, $button_classes) .'>'. esc_html($button_object['button_label']) .'</a>', $atts);

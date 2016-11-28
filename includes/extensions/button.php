@@ -217,6 +217,7 @@ class FusionButton	{
 	public function standard_layout($button_layouts) {
 		
 		$button_style_options = array(
+			'' => __('Choose Style.', 'fusion-extension-button'),
 			'btn btn-default' => __('Default', 'fusion-extension-button'),
 			'btn btn-primary' => __('Primary', 'fusion-extension-button'),
 			'btn btn-success' => __('Success', 'fusion-extension-button'),
@@ -229,6 +230,7 @@ class FusionButton	{
 		$button_style_options = apply_filters('fsn_button_style_options', $button_style_options);
 		
 		$button_size_options = array(
+			'' => __('Choose Size.', 'fusion-extension-button'),
 			'default' => __('Default', 'fusion-extension-button'),
 			'btn-lg' => __('Large', 'fusion-extension-button'),
 			'btn-sm' => __('Small', 'fusion-extension-button'),
@@ -250,13 +252,15 @@ class FusionButton	{
 					'type' => 'select',
 					'options' => $button_style_options,
 					'param_name' => 'button_style',
-					'label' => __('Style', 'fusion-extension-button')
+					'label' => __('Style', 'fusion-extension-button'),
+					'help' => __('Default is "Default".' , 'fusion-extension-button')
 				),
 				array(
 					'type' => 'select',
 					'options' => $button_size_options,
 					'param_name' => 'button_size',
 					'label' => __('Size', 'fusion-extension-button'),
+					'help' => __('Default is "Default".' , 'fusion-extension-button'),
 					'dependency' => array(
 						'param_name' => 'button_style',
 						'value' => array('btn btn-default', 'btn btn-primary', 'btn btn-success', 'btn btn-info', 'btn btn-warning', 'btn btn-danger', 'btn btn-link')

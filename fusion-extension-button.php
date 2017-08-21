@@ -7,7 +7,7 @@
  * Plugin Name: Fusion : Extension - Button
  * Plugin URI: http://www.agencydominion.com/fusion/
  * Description: Button Extension Package for Fusion.
- * Version: 1.1.5
+ * Version: 1.1.6
  * Author: Agency Dominion
  * Author URI: http://agencydominion.com
  * Text Domain: fusion-extension-button

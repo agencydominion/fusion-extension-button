@@ -25,6 +25,9 @@
 
 class FusionExtensionButton	{ 
 	public function __construct() {
+		
+		// Initialize the language files
+		add_action('plugins_loaded', array($this, 'load_textdomain'));
 						
 		// Enqueue admin scripts and styles
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts_styles'));

@@ -10,6 +10,8 @@
  * Version: 1.1.5
  * Author: Agency Dominion
  * Author URI: http://agencydominion.com
+ * Text Domain: fusion-extension-button
+ * Domain Path: /languages/
  * License: GPL2
  */
  
@@ -24,12 +26,20 @@
 class FusionExtensionButton	{ 
 	public function __construct() {
 						
-		// Initialize the language files
-		load_plugin_textdomain( 'fusion-extension-button', false, plugin_dir_url( __FILE__ ) . 'languages' );
-		
 		// Enqueue admin scripts and styles
 		add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts_styles'));
 		
+	}
+	
+	/**
+	 * Load Textdomain
+	 *
+	 * @since 1.1.6
+	 *
+	 */
+	 
+	public function load_textdomain() {
+		load_plugin_textdomain( 'fusion-extension-button', FALSE, basename( dirname( __FILE__ ) ) . '/languages/' );
 	}
 	
 	/**

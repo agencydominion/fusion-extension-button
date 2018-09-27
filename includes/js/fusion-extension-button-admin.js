@@ -5,7 +5,7 @@
 //init button
 jQuery(document).ready(function() {
 	jQuery('body').on('show.bs.modal', '#fsn_button_modal', function(e) {
-		var buttonModal = jQuery('#fsn_button_modal');
+		var buttonModal = jQuery(this);
 		var selectLayoutElement = buttonModal.find('[name="button_layout"]');
 		var selectedLayout = selectLayoutElement.val();
 		buttonModal.attr('data-layout', selectedLayout);
